@@ -1,5 +1,7 @@
 # 微信公众号爆款内容创作 Skill
 
+梦钊的公众号内容创作 skill。
+
 适用于 **OpenAI Codex / Claude Code / 其他支持 markdown skill 的 AI agent 工具**。
 
 这个 skill 专注两个垂直领域：
