@@ -1,0 +1,17 @@
+# macOS / editor noise
+.DS_Store
+._*
+.~*
+
+# Python / script caches
+__pycache__/
+*.py[cod]
+
+# Generated article examples and render artifacts
+article-assets/
+wechat-article-*.html
+wechat-article-*.docx
+
+# Local temporary exports
+*.tmp
+*.log

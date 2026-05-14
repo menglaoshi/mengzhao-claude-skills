@@ -1,0 +1,8 @@
+interface:
+  display_name: "微信公众号爆款写作"
+  short_description: "选题、写作、改稿和简约代码风 HTML"
+  brand_color: "#4EE1B5"
+  default_prompt: "Use $wechat-viral-content to draft a WeChat article and output a clean code-style HTML page."
+
+policy:
+  allow_implicit_invocation: true

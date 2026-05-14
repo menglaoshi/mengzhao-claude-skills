@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #f8fafc;
+      --panel-soft: #f3f6f8;
+      --ink: #243041;
+      --ink-strong: #101820;
+      --muted: #6d7886;
+      --rule: #d9e2ea;
+      --accent: #0aa77d;
+      --accent-soft: rgba(10, 167, 125, 0.14);
+      --danger: #e5484d;
+      --mono: "SFMono-Regular", "Cascadia Mono", "JetBrains Mono", "Menlo", "Consolas", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.86;
+      letter-spacing: 0;
+    }
+
+    .shell {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 56px 22px 88px;
+    }
+
+    .article {
+      background: #ffffff;
+      border-left: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+      padding: 0 30px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .kicker {
+      color: var(--accent);
+    }
+
+    .tagline {
+      text-align: right;
+    }
+
+    .header {
+      padding: 42px 0 36px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink-strong);
+      font-size: clamp(34px, 7vw, 58px);
+      line-height: 1.12;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 22px 0 0;
+      max-width: 620px;
+      color: #5f6f80;
+      font-size: 17px;
+      line-height: 1.88;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      margin-top: 28px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      margin: 36px 0;
+      padding: 24px 0 24px 22px;
+      border-left: 2px solid var(--accent);
+      color: var(--ink-strong);
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1.9;
+    }
+
+    .section {
+      padding: 34px 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    .section-index {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--ink-strong);
+      font-size: 24px;
+      line-height: 1.35;
+      font-weight: 720;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 18px;
+      font-size: 16px;
+      line-height: 1.92;
+    }
+
+    strong {
+      color: var(--ink-strong);
+      font-weight: 760;
+      background: linear-gradient(transparent 62%, var(--accent-soft) 0);
+    }
+
+    .quote {
+      margin: 30px 0;
+      padding: 24px 0;
+      border-top: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+      color: var(--ink-strong);
+      font-family: var(--serif);
+      font-size: 24px;
+      line-height: 1.65;
+    }
+
+    .note {
+      margin: 24px 0;
+      padding: 18px 20px;
+      background: var(--panel-soft);
+      border: 1px solid var(--rule);
+    }
+
+    .note-title {
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .code-line {
+      display: block;
+      margin-top: 10px;
+      padding: 12px 14px;
+      overflow-wrap: anywhere;
+      background: #ffffff;
+      border: 1px solid #d9e2ea;
+      color: #344256;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .media-slot {
+      margin: 26px 0;
+      padding: 28px 20px;
+      min-height: 180px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(90deg, rgba(10, 167, 125, 0.10) 1px, transparent 1px),
+        linear-gradient(rgba(10, 167, 125, 0.08) 1px, transparent 1px),
+        var(--panel);
+      background-size: 24px 24px;
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .article-image {
+      margin: 30px 0;
+      padding: 0;
+    }
+
+    .article-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--rule);
+      background: var(--panel);
+    }
+
+    .hero-visual {
+      margin: 34px 0 0;
+    }
+
+    .html-visual {
+      margin: 30px 0;
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      color: var(--ink);
+    }
+
+    .html-visual.hero-visual {
+      margin-top: 34px;
+    }
+
+    .visual-label {
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .visual-title {
+      margin: 0 0 16px;
+      color: var(--ink-strong);
+      font-size: 24px;
+      line-height: 1.35;
+      font-weight: 760;
+    }
+
+    .visual-sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .visual-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .visual-panel {
+      min-width: 0;
+      padding: 18px;
+      background: #ffffff;
+      border: 1px solid var(--rule);
+    }
+
+    .visual-num {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .visual-panel-title {
+      margin: 0 0 10px;
+      color: var(--ink-strong);
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 740;
+    }
+
+    .visual-window {
+      padding: 14px;
+      background: #ffffff;
+      border: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.8;
+      color: #344256;
+    }
+
+    .visual-window strong {
+      color: var(--accent);
+      background: none;
+      font-weight: 700;
+    }
+
+    .check-list {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      margin: 10px 0;
+      padding-left: 24px;
+      position: relative;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .check-list li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+      font-family: var(--mono);
+    }
+
+    .visual-rule {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .caption {
+      margin-top: -12px;
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .refs {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .refs h3 {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-size: 13px;
+      font-family: var(--mono);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        padding: 28px 14px 64px;
+      }
+
+      .article {
+        padding: 0 16px;
+      }
+
+      .topbar {
+        display: block;
+      }
+
+      .tagline {
+        margin-top: 8px;
+        text-align: left;
+      }
+
+      .header {
+        padding-top: 30px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .subtitle,
+      p {
+        font-size: 15px;
+      }
+
+      .lead {
+        font-size: 18px;
+      }
+
+      .section-head {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .html-visual {
+        padding: 18px;
+      }
+
+      .visual-grid,
+      .visual-grid.three {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="article">
+      <div class="topbar">
+        <div class="kicker">// {{KICKER}}</div>
+        <div class="tagline">{{TAGLINE}}</div>
+      </div>
+
+      <div class="header">
+        <h1>{{TITLE}}</h1>
+        <p class="subtitle">{{SUBTITLE}}</p>
+        <div class="meta">
+          <span>{{DATE}}</span>
+          <span>{{AUTHOR}}</span>
+          <span>{{READING_TIME}}</span>
+        </div>
+      </div>
+
+      <p class="lead">{{LEAD}}</p>
+
+      <div class="section">
+        <div class="section-head">
+          <div class="section-index">01</div>
+          <h2>{{SECTION_1_TITLE}}</h2>
+        </div>
+        <p>{{SECTION_1_PARAGRAPH}}</p>
+        <p>{{SECTION_1_PARAGRAPH}}</p>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div class="section-index">02</div>
+          <h2>{{SECTION_2_TITLE}}</h2>
+        </div>
+        <p>{{SECTION_2_PARAGRAPH}}</p>
+        <div class="note">
+          <div class="note-title">FIELD NOTE</div>
+          <p>{{NOTE_TEXT}}</p>
+          <span class="code-line">{{PROMPT_OR_FORMULA}}</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div class="section-index">03</div>
+          <h2>{{SECTION_3_TITLE}}</h2>
+        </div>
+        <p>{{SECTION_3_PARAGRAPH}}</p>
+        <div class="media-slot">{{MEDIA_PLACEHOLDER}}</div>
+        <p class="caption">{{MEDIA_CAPTION}}</p>
+      </div>
+
+      <div class="quote">{{PULL_QUOTE}}</div>
+
+      <div class="section">
+        <div class="section-head">
+          <div class="section-index">04</div>
+          <h2>{{CLOSING_TITLE}}</h2>
+        </div>
+        <p>{{CLOSING_PARAGRAPH}}</p>
+      </div>
+
+      <div class="refs">
+        <h3>references</h3>
+        <p>{{REFERENCE_1}}</p>
+        <p>{{REFERENCE_2}}</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
