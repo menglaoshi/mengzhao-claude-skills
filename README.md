@@ -53,8 +53,9 @@ wechat-viral-content/
 │   └── template.html                  ← 单文件 HTML 模板
 ├── scripts/
 │   └── illustrate_html.py             ← HTML 图片占位替换辅助脚本
-└── wechat-viral-content.zip           ← 当前 skill 打包文件
 ```
+
+本地项目文件夹中可额外保留 `wechat-viral-content.zip` 作为分享安装包；GitHub 仓库默认只发布源码与说明。
 
 ---
 

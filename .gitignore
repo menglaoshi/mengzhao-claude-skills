@@ -11,6 +11,7 @@ __pycache__/
 article-assets/
 wechat-article-*.html
 wechat-article-*.docx
+wechat-viral-content.zip
 
 # Local temporary exports
 *.tmp
